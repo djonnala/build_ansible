@@ -1,0 +1,14 @@
+---
+
+- name: Create bundle directory
+  file: path=/root/ansible_bundle state=directory
+
+- name: Copy setup Bundle
+  copy: "src=/tmp/ansible-tower-setup-bundle-{{tower_version}}-1.el{{ansible_distribution_major_version}}.tar.gz dest=/root/ansible_bundle.tar.gz owner=root group=root"
+
+- name: Extract Setup Bundle
+  unarchive: src=/root/ansible_bundle.tar.gz dest=/root/ansible_bundle copy=no
+
+- name: Copy Inventory File
+  template: "src=inventory.j2 dest=/root/ansible_bundle/ansible-tower-setup-bundle-{{tower_version}}-1.el{{ansible_distribution_major_version}}/inventory owner=root group=root"
+  

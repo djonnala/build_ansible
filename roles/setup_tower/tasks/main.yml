@@ -1,0 +1,20 @@
+---
+
+ - name: Copy Options File
+   template: "src=tower_setup_conf.j2 dest=/root/ansible_bundle/ansible-tower-setup-bundle-{{tower_version}}-1.el{{ansible_distribution_major_version}}/tower_setup_conf.yml"
+
+ - name: Register Current Tower version
+   shell: "cat /var/lib/awx/.tower_version"
+   register: current_tower_version
+   ignore_errors: True
+
+ - name: Set install_needed fact
+   set_fact: install_needed=False
+
+ - name: Set install_needed fact
+   set_fact: install_needed=True
+   when: "current_tower_version.rc == '1' or current_tower_version.stdout != '{{tower_version}}'"
+
+ - name: Run Tower Installer
+   command: "/root/ansible_bundle/ansible-tower-setup-bundle-{{tower_version}}-1.el{{ansible_distribution_major_version}}/setup.sh"
+   when: install_needed == True

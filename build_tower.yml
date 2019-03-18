@@ -1,0 +1,26 @@
+- name: Adding host to Inventory
+  connection: local
+  hosts: localhost
+  tasks:
+    - add_host: "hostname={{primary_ip}} groups=primary_tower"
+
+- name: Downloading PreReqs
+  connection: local
+  hosts: localhost
+  roles:
+  - local_prereqs
+
+- name: Setting up Internal Tower
+  hosts: localhost
+  connection: local
+  become: yes
+  become_user: root
+  roles:
+    - tower_prereqs
+    - general_tower
+    - setup_tower
+  vars:
+    - ha_mode: "internal"
+    - ip_list:
+      - "{{primary_ip}}"
+    - secondary_ips: []

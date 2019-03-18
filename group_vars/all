@@ -1,0 +1,9 @@
+---
+postgres_user: tower_awx
+redis_pass: Ansible@tmobile123
+rabbit_pass: Ansible@tmobile123
+postgres_pass: Ansible@tmobile123
+admin_pass: Ansible@tmobile123
+munin_pass: Ansible@tmobile123
+tower_version: 3.4.2
+

@@ -1,0 +1,10 @@
+admin_password: {{ admin_pass }}
+database: internal
+munin_password: {{ munin_pass | default('')}}
+pg_password: {{ postgres_pass }}
+primary_machine: {{ primary_ip }}
+redis_password: {{ redis_pass }}
+configure_private_vars:
+  ansible_ask_pass: False 
+  ansible_ssh_user: root
+  using_ssh_host_keys: False

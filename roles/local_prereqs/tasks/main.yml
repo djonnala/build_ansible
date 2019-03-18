@@ -1,0 +1,10 @@
+---
+
+- name: Ensure Tmp Dir
+  file: path=/tmp state=directory
+  ignore_errors: yes
+
+
+- name: Download Tower Bundle EL7
+  get_url: "url=https://releases.ansible.com/ansible-tower/setup-bundle/ansible-tower-setup-bundle-{{tower_version}}-1.el7.tar.gz dest=/tmp/ansible-tower-setup-bundle-{{tower_version}}-1.el7.tar.gz"
+
